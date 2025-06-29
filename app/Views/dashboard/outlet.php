@@ -26,20 +26,42 @@
         }
         .header {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
             margin-bottom: 30px;
+            gap: 20px;
         }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .profile-avatar {
+                align-self: flex-end;
+            }
+
+            .welcome-text h1 {
+                font-size: 22px;
+            }
+
+            .welcome-text p {
+                font-size: 14px;
+            }
+        }
+
         .welcome-text h1 {
-            margin: 0;
             font-size: 28px;
             font-weight: 700;
             color: #2c3e50;
+            margin: 0;
         }
         .welcome-text p {
-            margin: 5px 0 0;
-            color: #7f8c8d;
             font-size: 16px;
+            color: #7f8c8d;
+            margin: 5px 0 0;
         }
         .logout-btn {
             background-color: #f8d7da;
@@ -62,6 +84,43 @@
             /* Membuat 2 kolom di layar besar, dan 1 kolom di layar kecil */
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
+        }
+        /* STYLE UNTUK AVATAR PROFIL */
+        .profile-avatar {
+            background-color: #ecf0f1;
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+
+        .profile-avatar:hover {
+            background-color: #d0d8df;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .avatar-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .profile-avatar {
+            background-color: #ecf0f1;
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.2s, box-shadow 0.2s;
         }
 
         /* STYLE UNTUK SETIAP KARTU MENU */
@@ -123,8 +182,17 @@
                 <h1>Selamat datang, <?= esc(session('name')) ?>!</h1>
                 <p>Kelola semua kebutuhan outlet Anda di sini.</p>
             </div>
-            <a href="/logout" class="logout-btn">Logout</a>
+            <div class="avatar-container">
+                <a href="/outlet/profile" class="profile-avatar" title="Lihat Profil">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+                    </svg>
+                </a>
+            </div>
         </header>
+
+
         
         <main class="dashboard-grid">
             <a href="/outlet/my-outlets" class="menu-card">
