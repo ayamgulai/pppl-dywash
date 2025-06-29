@@ -30,7 +30,7 @@
             align-items: center;
             text-align: center;
             margin-bottom: 30px;
-            gap: 20px;
+            gap: 15px;
         }
 
         @media (max-width: 600px) {
@@ -86,6 +86,23 @@
             gap: 25px;
         }
         /* STYLE UNTUK AVATAR PROFIL */
+        /* Hilangkan efek warna link biru/ungu pada ikon profil */
+        .profile-avatar,
+        .profile-avatar:visited {
+            color: inherit;
+            background-color: #ecf0f1;
+        }
+
+        /* Jika pakai ikon SVG dan warna berubah, tambahkan ini juga */
+        .profile-avatar svg {
+            stroke: #34495e;
+            transition: stroke 0.2s;
+        }
+
+        .profile-avatar:hover svg {
+            stroke: #2c3e50;
+        }
+
         .profile-avatar {
             background-color: #ecf0f1;
             width: 96px;
@@ -190,6 +207,7 @@
                     </svg>
                 </a>
             </div>
+            <div class="profile-label">Profil</div>
         </header>
 
 
