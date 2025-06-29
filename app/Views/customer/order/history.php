@@ -84,9 +84,9 @@ Riwayat Pesanan
 <div class="bg-gray-50 px-4 py-2 rounded-t-xl border-b border-slate-200 -mx-5 -mt-5 mb-2">
   <!--<p class="text-xs text-slate-500 mb-1">Pembayaran</p>-->
   <?php if ($order['payment_status'] == 'pending'): ?>
-    <p class="text-red-500 text-sm font-medium">Menunggu pembayaran</p>
+    <p class="text-red-500 text-sm font-medium">Pending</p>
   <?php elseif ($order['payment_status'] == 'cod'): ?>
-    <p class="text-green-600 text-sm font-medium">COD</p>
+    <p class="text-blue-500 text-sm font-medium">COD</p>
   <?php elseif ($order['payment_status'] == 'lunas'): ?>
     <p class="text-green-600 text-sm font-medium">Lunas</p>
   <?php elseif ($order['payment_status'] == 'gagal'): ?>
