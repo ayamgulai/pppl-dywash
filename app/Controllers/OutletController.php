@@ -6,9 +6,63 @@ use App\Models\OutletModel;
 use App\Models\OrderModel;
 use App\Models\ReviewModel;
 use App\Models\ServiceModel;
+use App\Models\UserModel;
 
 class OutletController extends BaseController
 {
+    // --- FUNGSI : Profile Pemilik Outlet ---
+    /**
+     * Menampilkan halaman profil outlet yang dimiliki oleh owner yang login.
+     * Ini akan menampilkan informasi dasar outlet seperti nama, alamat, dan kontak.
+        */
+    public function profile()
+    {
+        $userId = session('user_id'); // dari session login
+        $userModel = new UserModel();
+        $user = $userModel->find($userId);
+        return view('outlet/profile', ['user' => $user]);
+    }
+    /**
+     * Menampilkan form untuk mengedit profil outlet.
+     * Ini akan menampilkan form dengan data yang sudah ada untuk diubah.
+     */
+    public function editProfile()
+    {
+        $userId = session('user_id'); // yang benar
+        $userModel = new UserModel();
+        $user = $userModel->find($userId);
+
+        return view('outlet/edit_profile', ['user' => $user]);
+    }
+    /**
+     * Memproses update profil outlet.
+     * Validasi input dan simpan perubahan ke database.
+     */
+    public function updateProfile()
+    {
+        $userId = session('user_id');
+        $userModel = new UserModel();
+
+        $rules = [
+            'name'  => 'required',
+            'email' => 'required|valid_email',
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $data = [
+            'name'  => $this->request->getPost('name'),
+            'email' => $this->request->getPost('email'),
+        ];
+
+        $userModel->update($userId, $data);
+
+        return redirect()->to('/outlet/profile')->with('message', 'Profil berhasil diperbarui.');
+    }
+
+
     // ====================================================================
     // === FITUR BARU: MANAJEMEN BANYAK OUTLET ============================
     // ====================================================================
@@ -24,8 +78,6 @@ class OutletController extends BaseController
         
         return view('outlet/my_outlets/index', $data);
     }
-
-    
 
     /**
      * Menampilkan form KOSONG untuk mendaftarkan outlet baru.

@@ -39,6 +39,9 @@ $routes->get('/customer/profil', 'CustomerController::cekProfil');
     $routes->post('/customer/profil/ganti-password-process', 'CustomerController::processChangePassword'); 
 
 // Rute untuk fitur-fitur Outlet
+$routes->get('/outlet/profile', 'OutletController::profile');
+$routes->get('/outlet/profile/edit_profile', 'OutletController::editProfile');
+$routes->post('/outlet/profile/update', 'OutletController::updateProfile');
 // Rute untuk manajemen banyak outlet
 $routes->get('/outlet/my-outlets', 'OutletController::listMyOutlets');
 $routes->get('/outlet/create', 'OutletController::createOutletForm');
